@@ -10,12 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.6",
+    "@react-spring/web": "^9.7.3",
     "@solana/web3.js": "^1.91.2",
     "@web3-react/core": "^8.2.3",
     "@web3-react/types": "^8.2.3",
     "antd": "^5.15.4",
     "eventemitter3": "^5.0.1",
-    "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.72.0",

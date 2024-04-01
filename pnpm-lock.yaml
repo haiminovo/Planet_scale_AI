@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@ant-design/icons': ^5.3.6
+  '@react-spring/web': ^9.7.3
   '@solana/web3.js': ^1.91.2
   '@types/react': ^18.2.66
   '@types/react-dom': ^18.2.22
@@ -14,7 +16,6 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.6
   eventemitter3: ^5.0.1
-  prettier: ^3.2.5
   react: ^18.2.0
   react-dom: ^18.2.0
   sass: ^1.72.0
@@ -24,12 +25,13 @@ specifiers:
   web3-react-phantom: ^1.0.4
 
 dependencies:
+  '@ant-design/icons': 5.3.6_react-dom@18.2.0+react@18.2.0
+  '@react-spring/web': 9.7.3_react-dom@18.2.0+react@18.2.0
   '@solana/web3.js': 1.91.2
   '@web3-react/core': 8.2.3_32ef43c880bb70d0eecbdf2a30a1cf8d
   '@web3-react/types': 8.2.3_32ef43c880bb70d0eecbdf2a30a1cf8d
   antd: 5.15.4_react-dom@18.2.0+react@18.2.0
   eventemitter3: 5.0.1
-  prettier: 3.2.5
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   sass: 1.72.0
@@ -90,8 +92,8 @@ packages:
     resolution: {integrity: sha512-vHbT+zJEVzllwP+CM+ul7reTEfBR0vgxFe7+lREAsAA7YGsYpboiq2sQNeQeRvh09GfQgs/GyFEvZpJ9cLXpXA==}
     dev: false
 
-  /@ant-design/icons/5.3.5_react-dom@18.2.0+react@18.2.0:
-    resolution: {integrity: sha512-Vyv/OsKz56BsKBtcRlLP6G8RGaRW43f7G5dK3XNPCaeV4YyehLVaITuNKi2YJG9hMVURkBdzdGhveNQlnKTFqw==}
+  /@ant-design/icons/5.3.6_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-JeWsgNjvkTTC73YDPgWOgdScRku/iHN9JU0qk39OSEmJSCiRghQMLlxGTCY5ovbRRoXjxHXnUKgQEgBDnQfKmA==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.0.0'
@@ -987,6 +989,54 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /@react-spring/animated/9.7.3_react@18.2.0:
+    resolution: {integrity: sha512-5CWeNJt9pNgyvuSzQH+uy2pvTg8Y4/OisoscZIR8/ZNLIOI+CatFBhGZpDGTF/OzdNFsAoGk3wiUYTwoJ0YIvw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/shared': 9.7.3_react@18.2.0
+      '@react-spring/types': 9.7.3
+      react: 18.2.0
+    dev: false
+
+  /@react-spring/core/9.7.3_react@18.2.0:
+    resolution: {integrity: sha512-IqFdPVf3ZOC1Cx7+M0cXf4odNLxDC+n7IN3MDcVCTIOSBfqEcBebSv+vlY5AhM0zw05PDbjKrNmBpzv/AqpjnQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/animated': 9.7.3_react@18.2.0
+      '@react-spring/shared': 9.7.3_react@18.2.0
+      '@react-spring/types': 9.7.3
+      react: 18.2.0
+    dev: false
+
+  /@react-spring/shared/9.7.3_react@18.2.0:
+    resolution: {integrity: sha512-NEopD+9S5xYyQ0pGtioacLhL2luflh6HACSSDUZOwLHoxA5eku1UPuqcJqjwSD6luKjjLfiLOspxo43FUHKKSA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/types': 9.7.3
+      react: 18.2.0
+    dev: false
+
+  /@react-spring/types/9.7.3:
+    resolution: {integrity: sha512-Kpx/fQ/ZFX31OtlqVEFfgaD1ACzul4NksrvIgYfIFq9JpDHFwQkMVZ10tbo0FU/grje4rcL4EIrjekl3kYwgWw==}
+    dev: false
+
+  /@react-spring/web/9.7.3_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-BXt6BpS9aJL/QdVqEIX9YoUy8CE6TJrU0mNCqSoxdXlIeNcEBWOfIyE6B14ENNsyQKS3wOWkiJfco0tCr/9tUg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/animated': 9.7.3_react@18.2.0
+      '@react-spring/core': 9.7.3_react@18.2.0
+      '@react-spring/shared': 9.7.3_react@18.2.0
+      '@react-spring/types': 9.7.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@rollup/rollup-android-arm-eabi/4.13.2:
     resolution: {integrity: sha512-3XFIDKWMFZrMnao1mJhnOT1h2g0169Os848NhhmGweEcfJ4rCi+3yMCOLG4zA61rbJdkcrM/DjVZm9Hg5p5w7g==}
     cpu: [arm]
@@ -1467,7 +1517,7 @@ packages:
     dependencies:
       '@ant-design/colors': 7.0.2
       '@ant-design/cssinjs': 1.18.5_react-dom@18.2.0+react@18.2.0
-      '@ant-design/icons': 5.3.5_react-dom@18.2.0+react@18.2.0
+      '@ant-design/icons': 5.3.6_react-dom@18.2.0+react@18.2.0
       '@ant-design/react-slick': 1.0.2_react@18.2.0
       '@babel/runtime': 7.24.1
       '@ctrl/tinycolor': 3.6.1
@@ -2512,12 +2562,6 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
     dev: true
-
-  /prettier/3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: false
 
   /punycode/2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
