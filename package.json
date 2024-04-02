@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
     "@react-spring/web": "^9.7.3",
+    "@solana/buffer-layout": "^4.0.1",
     "@solana/web3.js": "^1.91.2",
     "@web3-react/core": "^8.2.3",
     "@web3-react/types": "^8.2.3",
@@ -21,6 +22,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.72.0",
     "scss": "^0.2.4",
+    "tweetnacl": "^1.0.3",
     "web3-react-phantom": "^1.0.4"
   },
   "devDependencies": {

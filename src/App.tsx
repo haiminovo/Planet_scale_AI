@@ -62,8 +62,8 @@ function App() {
         window.open('https://phantom.app/', '_blank');
         return;
       }
-      initConnect(res?.solana).then(async (res) => {
-        if (!res) {
+      initConnect(res).then(async (res1) => {
+        if (!res1) {
           message.error('Failed to connect wallet!', 5);
           return;
         }
@@ -74,23 +74,28 @@ function App() {
   }
 
   const initProvider = async () => {
-    const phantomMultiChainProvider = await detectPhantomMultiChainProvider();
-    setProvider(phantomMultiChainProvider);
-    if (!phantomMultiChainProvider?.solana) {
+    const provider = window.phantom?.solana;
+    setProvider(provider);
+    if (!provider) {
       return false;
     }
     console.log('init Provider success!');
-    return phantomMultiChainProvider;
+    return provider;
   }
 
-  const initConnect = async (solana: { connect: (arg0: { onlyIfTrusted: boolean; }) => any; } | undefined) => {
-    const solanaPubKey = await solana?.connect({ onlyIfTrusted: true });
-    const pubKeyRes = solanaPubKey?.publicKey?.toString();
-    if (!pubKeyRes) {
-      return false;
+  const initConnect = async (provider: { connect: () => any; }) => {
+    try {
+      const resp = await provider.connect();
+      const pubKeyRes = resp?.publicKey?.toString();
+      if (!pubKeyRes) {
+        return false;
+      }
+      setCurrentPubkey(pubKeyRes);
+
+      return true;
+    } catch (err) {
+      console.error(err)
     }
-    setCurrentPubkey(pubKeyRes);
-    return true;
   };
 
   const getBalance = async () => {
@@ -116,9 +121,7 @@ function App() {
       getBalance().then((res) => {
         console.log('init Wallet Connect success!');
         console.log('balance is ' + res);
-
       });
-
     }
   }, [currentPubkey]);
 
