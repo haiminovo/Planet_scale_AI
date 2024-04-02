@@ -6,7 +6,7 @@ import { PhantomInjectedProvider } from "./types";
 import { customFetch } from "./utils/commonUtils/fetchUtil";
 import { Layout, Menu, Button, message, Spin, Tooltip } from 'antd';
 import { animated } from '@react-spring/web'
-import { PublicKey } from '@solana/web3.js';
+import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, TransactionInstruction, clusterApiUrl } from '@solana/web3.js';
 const { Header, Content, Footer } = Layout;
 import {
   LoadingOutlined,
@@ -46,11 +46,82 @@ function App() {
   const [banlance, setBalance] = useState();
   const [connectLoading, setConnectLoading] = useState(false);
 
+  const connection = new Connection(clusterApiUrl('devnet'),"confirmed");
+
+
+
   const HandleNavMenuClick = (item: any) => {
     console.log(item);
     switch (+item.key) {
       case 1: handleWalletConnect(); return;
       case 2: handleWalletConnect(); return;
+      case 3: test(); return;
+    }
+  }
+
+  const test = async () => {
+    // const airdropSignature = await connection.requestAirdrop(
+    //   new PublicKey(currentPubkey),
+    //   LAMPORTS_PER_SOL // 1 SOL = 1,000,000,000 lamports
+    // );
+    // // 等待空投交易确认
+    // const result = await connection.confirmTransaction(airdropSignature);
+
+    // // 打印结果
+    // console.log('Airdrop result:', result);
+    const publicKey = await connectWallet();
+    if (publicKey) {
+      await signAndSendTransaction(new PublicKey('4bQCcC7znUnifK47ctZpdRZXvPgMbDh2tEvUmF46kNcU'));
+    }
+  }
+
+  async function connectWallet() {
+    try {
+      const { solana } = anyWindow;
+      if (solana && solana.isPhantom) {
+        const response = await solana.connect();
+        console.log('钱包已连接，公钥:', response.publicKey.toString());
+        return response.publicKey;
+      } else {
+        alert('请安装Phantom钱包或解锁您的钱包');
+        return null;
+      }
+    } catch (error) {
+      console.error('连接到钱包失败', error);
+      return null;
+    }
+  }
+
+  async function signAndSendTransaction(publicKey: any) {
+    try {
+      const { blockhash } = await connection.getRecentBlockhash();
+      const instruction = new TransactionInstruction({
+        keys: [{pubkey:new PublicKey(currentPubkey), isSigner: true, isWritable: true},{pubkey:new PublicKey(publicKey), isSigner: false, isWritable: true}], // 这里要填写交云函数所需的键值对，比如{ pubkey: ..., isSigner: false, isWritable: true }
+        programId: new PublicKey('5B1PL95xhY1eVJmhLLs5uvKfjpRmJDHK99uDrDT8H5dN'),
+        data: Buffer.from([]), // ABI函数参数的编码数据
+      });
+      
+      
+      // 创建交易和添加指令
+      const transaction = new Transaction().add(
+        instruction
+      );
+
+      transaction.recentBlockhash = blockhash;
+      transaction.feePayer = new PublicKey(currentPubkey);
+
+      console.log(transaction);
+     
+      // 签名和发送交易
+      const signedTransaction = await anyWindow.solana.signAndSendTransaction(transaction);
+      console.log('签名的交易ID:', signedTransaction.signature);
+
+      // 确认交易
+      const confirmed = await connection.confirmTransaction(signedTransaction.signature, 'singleGossip');
+      console.log('交易确认状态:', confirmed);
+
+    } catch (error) {
+      console.error('交易失败', error);
     }
   }
 
@@ -74,7 +145,7 @@ function App() {
   }
 
   const initProvider = async () => {
-    const provider = window.phantom?.solana;
+    const provider = anyWindow.phantom?.solana;
     setProvider(provider);
     if (!provider) {
       return false;
@@ -154,6 +225,7 @@ function App() {
                 </div>
               </Menu.Item>
             )}
+            <Menu.Item key={3}>test</Menu.Item>
           </Menu>
           <Spin style={{ width: 14, right: 0 }} spinning={connectLoading} size="small" />
         </Header>

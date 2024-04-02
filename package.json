@@ -23,6 +23,7 @@
     "sass": "^1.72.0",
     "scss": "^0.2.4",
     "tweetnacl": "^1.0.3",
+    "vite-plugin-node-polyfills": "^0.21.0",
     "web3-react-phantom": "^1.0.4"
   },
   "devDependencies": {
