@@ -13,6 +13,7 @@ import {
   ReloadOutlined
 } from '@ant-design/icons';
 import { FadeInAnimation, ShuttleAnimation } from "./utils/commonUtils/reactSpringUtil";
+import backgroundImage from './assets/background.jpg';
 
 interface IInfo {
   icon: string,
@@ -46,7 +47,7 @@ function App() {
   const [banlance, setBalance] = useState();
   const [connectLoading, setConnectLoading] = useState(false);
 
-  const connection = new Connection(clusterApiUrl('devnet'),"confirmed");
+  const connection = new Connection(clusterApiUrl('devnet'));
 
 
 
@@ -71,7 +72,7 @@ function App() {
     // console.log('Airdrop result:', result);
     const publicKey = await connectWallet();
     if (publicKey) {
-      await signAndSendTransaction(new PublicKey('4bQCcC7znUnifK47ctZpdRZXvPgMbDh2tEvUmF46kNcU'));
+      await signAndSendTransaction('4bQCcC7znUnifK47ctZpdRZXvPgMbDh2tEvUmF46kNcU');
     }
   }
 
@@ -96,12 +97,12 @@ function App() {
     try {
       const { blockhash } = await connection.getRecentBlockhash();
       const instruction = new TransactionInstruction({
-        keys: [{pubkey:new PublicKey(currentPubkey), isSigner: true, isWritable: true},{pubkey:new PublicKey(publicKey), isSigner: false, isWritable: true}], // 这里要填写交云函数所需的键值对，比如{ pubkey: ..., isSigner: false, isWritable: true }
+        keys: [{ pubkey: new PublicKey(currentPubkey), isSigner: true, isWritable: true }, { pubkey: new PublicKey(publicKey), isSigner: false, isWritable: true }], // 这里要填写交云函数所需的键值对，比如{ pubkey: ..., isSigner: false, isWritable: true }
         programId: new PublicKey('5B1PL95xhY1eVJmhLLs5uvKfjpRmJDHK99uDrDT8H5dN'),
         data: Buffer.from([]), // ABI函数参数的编码数据
       });
-      
-      
+
+
       // 创建交易和添加指令
       const transaction = new Transaction().add(
         instruction
@@ -111,13 +112,14 @@ function App() {
       transaction.feePayer = new PublicKey(currentPubkey);
 
       console.log(transaction);
-     
+
       // 签名和发送交易
-      const signedTransaction = await anyWindow.solana.signAndSendTransaction(transaction);
+      const signedTransaction = await anyWindow.solana.signTransaction(transaction);
+
       console.log('签名的交易ID:', signedTransaction.signature);
 
       // 确认交易
-      const confirmed = await connection.confirmTransaction(signedTransaction.signature, 'singleGossip');
+      const confirmed = await connection.sendRawTransaction(signedTransaction.serialize());
       console.log('交易确认状态:', confirmed);
 
     } catch (error) {
@@ -131,16 +133,16 @@ function App() {
       if (!res) {
         message.error('Please install related plug-ins first', 5);
         window.open('https://phantom.app/', '_blank');
+        setConnectLoading(false);
         return;
       }
       initConnect(res).then(async (res1) => {
         if (!res1) {
           message.error('Failed to connect wallet!', 5);
+          setConnectLoading(false);
           return;
         }
-      }).finally(() => {
-        setConnectLoading(false);
-      });
+      })
     })
   }
 
@@ -192,6 +194,8 @@ function App() {
       getBalance().then((res) => {
         console.log('init Wallet Connect success!');
         console.log('balance is ' + res);
+      }).finally(() => {
+        setConnectLoading(false);
       });
     }
   }, [currentPubkey]);
@@ -232,7 +236,7 @@ function App() {
       </div>
       <Content className="layout__content">
         <div className="container">
-          <div className="main">
+          <div className="main" style={{ backgroundImage: `url(${backgroundImage})`, objectFit: 'contain' }}>
             <animated.div className="subPage1" style={{ ...FadeInAnimation() }}>
               <p className="headLine">Planet-scale AI </p>
               <p className="headLine">Powered by Solana & FHE</p>
