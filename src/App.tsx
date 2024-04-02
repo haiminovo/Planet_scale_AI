@@ -14,6 +14,7 @@ import {
 } from '@ant-design/icons';
 import { FadeInAnimation, ShuttleAnimation } from "./utils/commonUtils/reactSpringUtil";
 import backgroundImage from './assets/background.jpg';
+import frameworkImage from './assets/framework.jpg';
 
 interface IInfo {
   icon: string,
@@ -236,7 +237,7 @@ function App() {
       </div>
       <Content className="layout__content">
         <div className="container">
-          <div className="main" style={{ backgroundImage: `url(${backgroundImage})`, objectFit: 'contain' }}>
+          <div className="main" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
             <animated.div className="subPage1" style={{ ...FadeInAnimation() }}>
               <p className="headLine">Planet-scale AI </p>
               <p className="headLine">Powered by Solana & FHE</p>
@@ -261,10 +262,12 @@ function App() {
             </div>
           </div>
           <div className="main">
-
+            <div className="subPage2">
+              <img className="frameworkImage" src={frameworkImage} alt="frameworkImage" />
+            </div>
           </div>
           <div className="main">
-            <div className="subPage2">
+            <div className="subPage3">
               <div className="aboutUs">
                 <div className="header">
                   <img className="logo" src="src/assets/vivaai_dark.png" alt="viva ai" />
