@@ -15,3 +15,11 @@ export const FadeInAnimation = () => {
         delay:200,
     })
 }
+
+export const RotateAnimation = (canDo:boolean) => {
+    return useSpring({
+        from: {  transform: 'rotateX(90deg) rotateY(90deg)'},
+        to: canDo&&{ transform: 'rotateX(0deg) rotateY(0deg)' },
+        delay:50,
+    })
+}

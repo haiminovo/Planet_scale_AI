@@ -2,6 +2,24 @@
     position: relative;
     width: 100vw;
     min-width: 1280px;
+    .backToTop{
+        position: fixed;
+        font-size: 40px;
+        padding-top: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 15px;
+        color: #fff;
+        background-color: rgba($color: #fff, $alpha: 0.3);
+        right: 50px;
+        bottom: 50px;
+        z-index: 999;
+        cursor: pointer;
+        user-select:none;
+    }
     &__header{
         min-width: 1280px;
         position: fixed;
@@ -15,14 +33,13 @@
         justify-content: space-between;
         align-items: center;
         .logo{
-            width: 128px;
+            width: 36px;
             height: 36px;
             object-fit:contain;
         }
         .name{
-            width: 380px;
-            font-size: 36px;
-            font-weight:500;
+            font-size: 42px;
+            font-weight:bold;
             color: #fff;
             padding-left: 16px;
             font-family:'Courier New', Courier, monospace;
@@ -82,13 +99,79 @@
                     }
                 }
                 .subPage2{
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
                     .frameworkImage{
-                        width: 100%;
-                        height: 100%;
+                        display: block;
+                        height: 100vh;
                         object-fit: contain;
+                        z-index: 2;
                     }
+                    .frameworkFilter {
+                        position: absolute;
+                        width: calc(200px);
+                        height: 100vh;
+                        object-fit: cover;
+                        transform: scale(-1.1, 1.0);
+                        filter: blur(20px);
+                        overflow: hidden;
+                        z-index: 1;
+                      }
                 }
                 .subPage3{
+                    padding: 5% 5% 0 5%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    transform-style: preserve-3d;
+                    perspective: 500px;
+                    .title{
+                        font-size: 36px;
+                        font-weight: bolder;
+                    }
+                    .desc{
+                        font-size: 18px;
+
+                    }
+                    .cardBox{
+                        display: flex;
+                        padding: 32px 0 24px 0;
+                        gap: 32px;
+                        .card{
+                            padding: 16px;
+                            width: 600px;
+                            height: 500px;
+                            border-radius: 5px;
+                            background-color: #222;
+                            transform-style: preserve-3d;
+
+                            .img{
+                                width: 100%;
+                                object-fit: contain;
+                            }
+                            .inf{
+                                position: relative;
+                                padding-left: 16px;
+                                .head{
+                                    font-size: 24px;
+                                    font-weight: bold;
+                                }
+                                .desc{
+                                    font-size: 16px;
+                                }
+                                .link{
+                                    position: absolute;
+                                    right: 20px;
+                                    font-weight: bolder;
+                                    font-size: 20px;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+                .subPage4{
                     padding: 5% 5% 0 5%;
                     .header{
                         width: 200px;
@@ -119,7 +202,7 @@
                     background-color: darkslateblue;
                 }
                 &:nth-child(2n){
-                    background-color: #222;
+                    background-color: #000;
                 }
             }
             .info{
