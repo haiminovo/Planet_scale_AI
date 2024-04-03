@@ -160,8 +160,16 @@
                                 .desc{
                                     font-size: 16px;
                                 }
+                                .tip{
+                                    position: absolute;
+                                    font-size: 20px;
+                                    color: rgb(80, 241, 241);
+                                    font-weight: bold;
+                                    transform: translateY(-15px);
+                                }
                                 .link{
                                     position: absolute;
+                                    padding-top: 5px;
                                     right: 20px;
                                     font-weight: bolder;
                                     font-size: 20px;
@@ -178,14 +186,13 @@
                 .subPage4{
                     padding: 5% 5% 0 5%;
                     .header{
+                        margin-left: 140px;
                         width: 200px;
                         height: 60px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
                         gap: 16px;
-                        background-color: #000;
-                        border-radius: 10px;
                     }
                     .logo{
                         width: 32px;
@@ -196,11 +203,56 @@
 
                     }
                     .desc{
-                        padding: 5% 15% 0px 15% ;
+                        padding: 5% 15% 0 15% ;
                         font-size: 24px;
-                        line-height: 60px;
+                        line-height: 48px;
                         text-indent: 2em;
                     }
+                    .btn{
+                        width: 150px;
+                        height: 50px;
+                        position: absolute;
+                        right: 400px;
+                        bottom: 100px;
+                        background-color:rgba($color: #fff, $alpha: 0.2);
+                        color: #fff;
+                        font-weight: bold;
+                        border: 3px solid #fff;
+                        border-radius: 15px;
+                    }
+                    .contact{
+                        display: flex;
+                        position:absolute;
+                        right: 150px;
+                        bottom: 24px;
+                        flex-direction: column;
+                        .top{
+                            height: 56px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 16px;
+                            background-color: #fff;
+                            border-radius: 15px;
+                            .cu{
+                                color: #000;
+                                font-size: 36px;
+                                font-weight: bolder;
+                                line-height: 36px;
+                            }
+                            .xIcon{
+                                width: 36px;
+                                height: 36px;
+                                border-radius: 5px;
+                            }
+                        }
+                        .email{
+                            font-size: 16px;
+                            font-weight: bold;
+                            color: rgb(80, 241, 241);
+                        }
+                    }
+                    
                 }
                 &:nth-child(2n+1){
                     background-color: darkslateblue;
@@ -221,8 +273,5 @@
                 }
             }
         }
-    }
-    &__footer{
-        background-color: black;
     }
 }

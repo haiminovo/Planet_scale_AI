@@ -9,12 +9,14 @@ import { debounce } from 'lodash';
 
 import { FadeInAnimation, RotateAnimation, ShuttleAnimation } from "./utils/commonUtils/reactSpringUtil";
 import backgroundImage from './assets/background.jpg';
+import backgroundImageRe from './assets/background_re.jpg';
 import backgroundImageBase from './assets/background_base.jpg';
 import frameworkImage from './assets/framework.jpg';
 import demo from './assets/demo.png';
 import demo1 from './assets/demo1.png';
 import vivaai from './assets/vivaai_light.png';
 import vivaai1 from './assets/vivaai_dark.png';
+import xIcon from './assets/x.jpg';
 
 interface IInfo {
   icon: string,
@@ -45,12 +47,12 @@ function App() {
   const [currentPubkey, setCurrentPubkey] = useState("");
   const [banlance, setBalance] = useState<number>();
   const [connectLoading, setConnectLoading] = useState(false);
-  const [cardRoll,setCardRoll]= useState(false);
+  const [cardRoll, setCardRoll] = useState(false);
 
   // mouseOverContainer.onmousemove = function(e) {
   //   let box = element.getBoundingClientRect();
   //   let calcY = e.clientX - box.x - (box.width / 2);
-      
+
   //   element.style.transform  = "rotateY(" + calcY + "deg) ";
   // }
 
@@ -64,7 +66,7 @@ function App() {
     }
   }
 
-  const handleTryItClick = async (type:number) => {
+  const handleTryItClick = async (type: number) => {
     // const airdropSignature = await connection.requestAirdrop(
     //   new PublicKey(currentPubkey),
     //   LAMPORTS_PER_SOL // 1 SOL = 1,000,000,000 lamports
@@ -79,21 +81,21 @@ function App() {
       return;
     }
 
-    if(sessionStorage.getItem('canTry')==='true'){
-      switch(type){
-        case 1:window.open('http://47.245.31.170:7860/','_blank');return;
-        case 2:window.open('http://47.245.31.170:7861/','_blank');return;
+    if (sessionStorage.getItem('canTry') === 'true') {
+      switch (type) {
+        case 1: window.open('http://47.245.31.170:7860/', '_blank'); return;
+        case 2: window.open('http://47.245.31.170:7861/', '_blank'); return;
       }
-      
+
       return;
     }
 
-    await signAndSendTransaction('4bQCcC7znUnifK47ctZpdRZXvPgMbDh2tEvUmF46kNcU').then(async ()=>{
+    await signAndSendTransaction('4bQCcC7znUnifK47ctZpdRZXvPgMbDh2tEvUmF46kNcU').then(async () => {
       await getBalance();
-      sessionStorage.setItem('canTry','true')
-      switch(type){
-        case 1:window.open('http://47.245.31.170:7860/','_blank');return;
-        case 2:window.open('http://47.245.31.170:7861/','_blank');return;
+      sessionStorage.setItem('canTry', 'true')
+      switch (type) {
+        case 1: window.open('http://47.245.31.170:7860/', '_blank'); return;
+        case 2: window.open('http://47.245.31.170:7861/', '_blank'); return;
       }
     });
 
@@ -166,15 +168,17 @@ function App() {
     return provider;
   }
 
-  const initConnect = async (provider: { connect: () => any; }) => {
+  const initConnect = async (provider: {
+    on(arg0: string, arg1: () => void): unknown; request: (arg0: { method: string; }) => any;
+  }) => {
     try {
-      const resp = await provider.connect();
+      const resp = await provider.request({ method: "connect" });
+      provider.on("connect", () => console.log("connected!"));
       const pubKeyRes = resp?.publicKey?.toString();
       if (!pubKeyRes) {
         return false;
       }
       setCurrentPubkey(pubKeyRes);
-
       return true;
     } catch (err) {
       console.error(err)
@@ -191,7 +195,7 @@ function App() {
         "params": [
           currentPubkey
         ]
-      }).finally(()=>{
+      }).finally(() => {
         setConnectLoading(false);
       });
       const balanceVal = resp.result.value;
@@ -236,7 +240,7 @@ function App() {
           >
             {/* <Menu.Item key={0}>Contact</Menu.Item> */}
             {(!banlance && banlance !== 0) ? (
-              <Menu.Item key={1} disabled={connectLoading}>Wallet Connect</Menu.Item>
+              <Menu.Item key={1} disabled={connectLoading} style={{ color: '#fff' }}>Connect Wallet</Menu.Item>
             ) : (
               <Menu.Item key={2}>
                 <div className="accountInfo">
@@ -285,30 +289,32 @@ function App() {
             </div>
           </div>
           <div className="main" style={{ backgroundImage: `url(${backgroundImageBase})`, backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
-            <div className="subPage3" onMouseOver={()=>setCardRoll(true)}>
+            <div className="subPage3" onMouseOver={() => setCardRoll(true)}>
               <p className="title">Want to see FHE in action?</p>
               <p className="desc">Check out Zama's real demo using FHE.</p>
               <div className="cardBox">
-                <animated.div className="card" style={{...RotateAnimation(cardRoll)}}>
+                <animated.div className="card" style={{ ...RotateAnimation(cardRoll) }}>
                   <img className="img" src={demo} alt="demo" />
                   <div className="inf">
                     <p className="head">Encryptede photo filtering</p>
                     <p className="desc">Image Filtering On Encrypted Data Using Fully Homomorphic Encryption</p>
+                    <p className="tip">Price: $1 ≈ 0.005 Sol</p>
                     <a className="link" onClick={debounce(() => handleTryItClick(1), 500)}>{'Try it ⮕'}</a>
                   </div>
                 </animated.div>
-                <animated.div className="card" style={{...RotateAnimation(cardRoll)}}>
+                <animated.div className="card" style={{ ...RotateAnimation(cardRoll) }}>
                   <img className="img" src={demo1} alt="demo" />
                   <div className="inf">
                     <p className="head">Encryptede sentiment Analysis</p>
                     <p className="desc">Sentiment Analysis On Encrypted Data Using Homomorphic Encryption</p>
+                    <p className="tip">Price: $1 ≈ 0.005 Sol</p>
                     <a className="link" onClick={debounce(() => handleTryItClick(2), 500)}>{'Try it ⮕'}</a>
                   </div>
                 </animated.div>
               </div>
             </div>
           </div>
-          <div className="main">
+          <div className="main" style={{ backgroundImage: `url(${backgroundImageRe})`, backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
             <div className="subPage4">
               <div className="aboutUs">
                 <div className="header">
@@ -319,6 +325,14 @@ function App() {
                   Welcome to the future of privacy-preserving AI, where privacy meets innovation, powered by the revolutionary integration of Solana, Web3 and blockchain technologies. Our platform is designed to revolutionize the way data is utilized in the AI realm, offering an unparalleled layer of security and transparency through Fully Homomorphic Encryption (FHE). By harnessing the power of these cutting-edge technologies, we provide a secure, scalable, and privacy-preserving platform that enables users to exchange data and execute AI models with complete peace of mind. Whether you're a developer, a business, or an enthusiast exploring the potentials of AI, our platform opens up new horizons for secure data collaboration and innovation, ensuring that your data remains private and your AI endeavors are boundless.
                 </p>
               </div>
+              <div className="contact">
+                <div className="top">
+                  <p className="cu">Follow Us</p>
+                  <img src={xIcon} className="xIcon" alt="x" />
+                </div>
+                <p className="email">ai-tech-foundation@proton.me</p>
+              </div>
+
             </div>
           </div>
         </div>
