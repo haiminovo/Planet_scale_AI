@@ -195,7 +195,7 @@ function App() {
         setConnectLoading(false);
       });
       const balanceVal = resp.result.value;
-      const val = balanceVal / 10000000000;
+      const val = balanceVal / 1000000000;
       setBalance(val);
       return balanceVal;
     } catch (err) {
