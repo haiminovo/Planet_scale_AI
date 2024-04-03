@@ -11,6 +11,10 @@ import { FadeInAnimation, RotateAnimation, ShuttleAnimation } from "./utils/comm
 import backgroundImage from './assets/background.jpg';
 import backgroundImageBase from './assets/background_base.jpg';
 import frameworkImage from './assets/framework.jpg';
+import demo from './assets/demo.png';
+import demo1 from './assets/demo1.png';
+import vivaai from './assets/vivaai_light.png';
+import vivaai1 from './assets/vivaai_dark.png';
 
 interface IInfo {
   icon: string,
@@ -219,7 +223,7 @@ function App() {
       <div className="backToTop" onClick={() => handleScroll(0)}>^</div>
       <div>
         <Header className="layout__header">
-          <img className="logo" src="src/assets/vivaai_light.png" alt="FHE ai" />
+          <img className="logo" src={vivaai} alt="FHE ai" />
           <p className="name">
             FHE-AI
           </p>
@@ -286,7 +290,7 @@ function App() {
               <p className="desc">Check out Zama's real demo using FHE.</p>
               <div className="cardBox">
                 <animated.div className="card" style={{...RotateAnimation(cardRoll)}}>
-                  <img className="img" src="src/assets/demo.png" alt="demo" />
+                  <img className="img" src={demo} alt="demo" />
                   <div className="inf">
                     <p className="head">Encryptede photo filtering</p>
                     <p className="desc">Image Filtering On Encrypted Data Using Fully Homomorphic Encryption</p>
@@ -294,7 +298,7 @@ function App() {
                   </div>
                 </animated.div>
                 <animated.div className="card" style={{...RotateAnimation(cardRoll)}}>
-                  <img className="img" src="src/assets/demo1.png" alt="demo" />
+                  <img className="img" src={demo1} alt="demo" />
                   <div className="inf">
                     <p className="head">Encryptede sentiment Analysis</p>
                     <p className="desc">Sentiment Analysis On Encrypted Data Using Homomorphic Encryption</p>
@@ -308,7 +312,7 @@ function App() {
             <div className="subPage4">
               <div className="aboutUs">
                 <div className="header">
-                  <img className="logo" src="src/assets/vivaai_dark.png" alt="viva ai" />
+                  <img className="logo" src={vivaai1} alt="FHE ai" />
                   <h1 className="title">About Us</h1>
                 </div>
                 <p className="desc">
