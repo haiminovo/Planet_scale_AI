@@ -45,7 +45,7 @@ function App() {
   const { connector, hooks } = useWeb3React();
   const [provider, setProvider] = useState<PhantomInjectedProvider | null>(null);
   const [currentPubkey, setCurrentPubkey] = useState("");
-  const [banlance, setBalance] = useState();
+  const [banlance, setBalance] = useState<number>();
   const [connectLoading, setConnectLoading] = useState(false);
 
   const connection = new Connection(clusterApiUrl('devnet'));
@@ -96,12 +96,17 @@ function App() {
 
   async function signAndSendTransaction(publicKey: any) {
     try {
+      const buffer = Buffer.alloc(8);
+      buffer.writeBigInt64LE(BigInt(10000));
       const { blockhash } = await connection.getRecentBlockhash();
       const instruction = new TransactionInstruction({
-        keys: [{ pubkey: new PublicKey(currentPubkey), isSigner: true, isWritable: true }, { pubkey: new PublicKey(publicKey), isSigner: false, isWritable: true }], // 这里要填写交云函数所需的键值对，比如{ pubkey: ..., isSigner: false, isWritable: true }
-        programId: new PublicKey('5B1PL95xhY1eVJmhLLs5uvKfjpRmJDHK99uDrDT8H5dN'),
-        data: Buffer.from([]), // ABI函数参数的编码数据
+        keys: [{ pubkey: new PublicKey(currentPubkey), isSigner: true, isWritable: true }, { pubkey: new PublicKey(publicKey), isSigner: false, isWritable: true }, { pubkey: new PublicKey('11111111111111111111111111111111'), isSigner: false, isWritable: false }], // 这里要填写交云函数所需的键值对，比如{ pubkey: ..., isSigner: false, isWritable: true }
+        programId: new PublicKey('DgN4fbhBJ6KQvA6M1YE5uz3pZhYPf5A6GqPgWsKRGnWd'),
+        data: buffer, // ABI函数参数的编码数据
       });
+
+      console.log(instruction);
+
 
 
       // 创建交易和添加指令
@@ -183,7 +188,8 @@ function App() {
         ]
       });
       const balanceVal = resp.result.value;
-      setBalance(balanceVal);
+      const val = balanceVal / 10000000000;
+      setBalance(val);
       return balanceVal;
     } catch (err) {
       // error message
@@ -224,7 +230,7 @@ function App() {
                 <div className="accountInfo">
                   <Tooltip title={'Click to refresh the balance'} trigger={'hover'}>
                     <div>
-                      Wallet Balance：{banlance}
+                      Wallet Balance ≈ <strong>{banlance.toFixed(3) + ' sol'}</strong>
                     </div>
                   </Tooltip>
                 </div>
