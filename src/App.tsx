@@ -1,7 +1,5 @@
 import "./App.scss";
-import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
-import { PhantomInjectedProvider } from "./types";
 import { customFetch } from "./utils/commonUtils/fetchUtil";
 import { Layout, Menu, Button, message, Spin, Tooltip } from 'antd';
 import { animated } from '@react-spring/web'
@@ -40,8 +38,6 @@ const infoArr: IInfo[] = [
 
 function App() {
   const anyWindow: any = window;
-  const { connector, hooks } = useWeb3React();
-  const [provider, setProvider] = useState<PhantomInjectedProvider | null>(null);
   const [currentPubkey, setCurrentPubkey] = useState("");
   const [banlance, setBalance] = useState<number>();
   const [connectLoading, setConnectLoading] = useState(false);
@@ -159,7 +155,6 @@ function App() {
 
   const initProvider = async () => {
     const provider = anyWindow.phantom?.solana;
-    setProvider(provider);
     if (!provider) {
       return false;
     }
