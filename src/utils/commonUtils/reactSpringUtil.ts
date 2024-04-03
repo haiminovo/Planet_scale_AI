@@ -1,9 +1,9 @@
 import { useSpring } from '@react-spring/web'
   //  元素移入动效函数
-export const ShuttleAnimation = (direction: 'x' | 'y', from: number, to: number, delay: number) => {
+export const ShuttleAnimation = (direction: 'x' | 'y', from: number, to: number=0, delay: number) => {
     return useSpring({
         from: { [direction]: from },
-        to: { [direction]: 0 },
+        to: { [direction]: to },
         delay: delay
     })
 }
