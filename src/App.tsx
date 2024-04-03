@@ -11,6 +11,7 @@ import { debounce } from 'lodash';
 
 import { FadeInAnimation, RotateAnimation, ShuttleAnimation } from "./utils/commonUtils/reactSpringUtil";
 import backgroundImage from './assets/background.jpg';
+import backgroundImageBase from './assets/background_base.jpg';
 import frameworkImage from './assets/framework.jpg';
 
 interface IInfo {
@@ -284,7 +285,7 @@ function App() {
               <img className="frameworkFilter" src={frameworkImage} alt="frameworkFilter" style={{ top: 0, right: 0, objectPosition: 'right' }} />
             </div>
           </div>
-          <div className="main">
+          <div className="main" style={{ backgroundImage: `url(${backgroundImageBase})`, backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
             <div className="subPage3" onMouseOver={()=>setCardRoll(true)}>
               <p className="title">Want to see FHE in action?</p>
               <p className="desc">Check out Zama's real demo using FHE.</p>

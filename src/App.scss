@@ -166,6 +166,10 @@
                                     font-weight: bolder;
                                     font-size: 20px;
                                     text-decoration: underline;
+                                    color: rgb(80, 241, 241);
+                                    &:hover{
+                                        color: rgb(175, 255, 255);
+                                    }
                                 }
                             }
                         }
