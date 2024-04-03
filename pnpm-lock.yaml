@@ -5,6 +5,7 @@ specifiers:
   '@react-spring/web': ^9.7.3
   '@solana/buffer-layout': ^4.0.1
   '@solana/web3.js': ^1.91.2
+  '@types/lodash': ^4.17.0
   '@types/react': ^18.2.66
   '@types/react-dom': ^18.2.22
   '@typescript-eslint/eslint-plugin': ^7.2.0
@@ -47,6 +48,7 @@ dependencies:
   web3-react-phantom: 1.0.4_32ef43c880bb70d0eecbdf2a30a1cf8d
 
 devDependencies:
+  '@types/lodash': 4.17.0
   '@types/react': 18.2.73
   '@types/react-dom': 18.2.23
   '@typescript-eslint/eslint-plugin': 7.4.0_f82ea0e1e75439fad4af8cfa8aaac44e
@@ -1225,6 +1227,10 @@ packages:
 
   /@types/json-schema/7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+    dev: true
+
+  /@types/lodash/4.17.0:
+    resolution: {integrity: sha512-t7dhREVv6dbNj0q17X12j7yDG4bD/DHYX7o5/DbDxobP0HnGPgpRz2Ej77aL7TZT3DSw13fqUTj8J4mMnqa7WA==}
     dev: true
 
   /@types/node/12.20.55:
