@@ -1,7 +1,7 @@
 .layout{
     position: relative;
     width: 100vw;
-    min-width: 1280px;
+    min-width: 1440px;
     .backToTop{
         position: fixed;
         font-size: 40px;
@@ -14,14 +14,14 @@
         border-radius: 15px;
         color: #fff;
         background-color: rgba($color: #fff, $alpha: 0.3);
-        right: 50px;
-        bottom: 50px;
+        right: 1.5%;
+        bottom: 2%;
         z-index: 999;
         cursor: pointer;
         user-select:none;
     }
     &__header{
-        min-width: 1280px;
+        min-width: 1440px;
         position: fixed;
         top:0;
         left: 0;
@@ -62,7 +62,7 @@
     }
     &__content{
         height:100vh;
-        min-width: 1280px;
+        min-width: 1440px;
         min-height: 720px;
         .container{
             .main{
@@ -73,7 +73,7 @@
                 color: #fff;
                 scroll-snap-align: start;
                 .subPage1{
-                    padding: 10% 10% 0 10%;
+                    padding: 15% 10% 0 10%;
                     .headLine{
                         width: fit-content;
                         margin: 0;
@@ -95,6 +95,14 @@
                             font-size: 16px;
                             color: #000;
                             font-weight: bold;
+                        }
+                    }
+                }
+                .info{
+                    &__item{
+                        .desc{
+                            line-height: 16px;
+                            margin: 8px 0 8px 16px;
                         }
                     }
                 }
@@ -136,12 +144,12 @@
                     }
                     .cardBox{
                         display: flex;
+                        justify-content: center;
                         padding: 32px 0 24px 0;
                         gap: 32px;
                         .card{
                             padding: 16px;
-                            width: 600px;
-                            height: 500px;
+                            width: 40%;
                             border-radius: 5px;
                             background-color: #222;
                             transform-style: preserve-3d;
@@ -160,23 +168,25 @@
                                 .desc{
                                     font-size: 16px;
                                 }
-                                .tip{
-                                    position: absolute;
-                                    font-size: 20px;
-                                    color: rgb(80, 241, 241);
-                                    font-weight: bold;
-                                    transform: translateY(-15px);
-                                }
-                                .link{
-                                    position: absolute;
-                                    padding-top: 5px;
-                                    right: 20px;
-                                    font-weight: bolder;
-                                    font-size: 20px;
-                                    text-decoration: underline;
-                                    color: rgb(80, 241, 241);
-                                    &:hover{
-                                        color: rgb(175, 255, 255);
+                                .bottom{
+                                    display: flex;
+                                    width: 100%;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    .tip{
+                                        font-size: 20px;
+                                        color: rgb(80, 241, 241);
+                                        font-weight: bold;
+                                    }
+                                    .link{
+                                        right: 20px;
+                                        font-weight: bolder;
+                                        font-size: 20px;
+                                        text-decoration: underline;
+                                        color: rgb(80, 241, 241);
+                                        &:hover{
+                                            color: rgb(175, 255, 255);
+                                        }
                                     }
                                 }
                             }
@@ -185,40 +195,44 @@
                 }
                 .subPage4{
                     padding: 5% 5% 0 5%;
-                    .header{
-                        margin-left: 140px;
-                        width: 200px;
-                        height: 60px;
+                    .aboutUs{
                         display: flex;
+                        flex-direction: column;
                         justify-content: center;
-                        align-items: center;
-                        gap: 16px;
-                    }
-                    .logo{
-                        width: 32px;
-                        height: 32px;
-                        object-fit: contain;
-                    }
-                    .title{
-
-                    }
-                    .desc{
-                        padding: 5% 15% 0 15% ;
-                        font-size: 24px;
-                        line-height: 48px;
-                        text-indent: 2em;
-                    }
-                    .btn{
-                        width: 150px;
-                        height: 50px;
-                        position: absolute;
-                        right: 400px;
-                        bottom: 100px;
-                        background-color:rgba($color: #fff, $alpha: 0.2);
-                        color: #fff;
-                        font-weight: bold;
-                        border: 3px solid #fff;
-                        border-radius: 15px;
+                        height: 100%;
+                        .header{
+                            margin-left: 100px;
+                            width: 200px;
+                            height: 60px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 16px;
+                        }
+                        .logo{
+                            width: 32px;
+                            height: 32px;
+                            object-fit: contain;
+                        }
+                        .desc{
+                            height: 100%;
+                            padding: 5% 15% 0 15% ;
+                            font-size: 24px;
+                            line-height: 48px;
+                            text-indent: 2em;
+                        }
+                        .btn{
+                            width: 150px;
+                            height: 50px;
+                            position: absolute;
+                            right: 400px;
+                            bottom: 100px;
+                            background-color:rgba($color: #fff, $alpha: 0.2);
+                            color: #fff;
+                            font-weight: bold;
+                            border: 3px solid #fff;
+                            border-radius: 15px;
+                        }
                     }
                     .contact{
                         display: flex;
@@ -275,3 +289,77 @@
         }
     }
 }
+@media (max-width: 1440px) {
+    .subPage1{
+        .headLine{
+            font-size: 40px !important;
+            line-height: 40px !important;
+        }
+        .subLine{
+            font-size: 16px !important;
+            line-height: 20px !important;
+        }
+        .buttonBox{
+            padding-top: 36px !important;
+            .button{
+                font-size: 12px !important;
+            }
+        }
+    }
+    .info{
+        &__item{
+            .desc{
+                line-height: 12px;
+                margin: 8px 0 8px 16px;
+            }
+        }
+    }
+    .subPage3{
+        .cardBox{
+            .card{
+                .inf{
+                    .head{
+                        font-size: 20px !important;
+                    }
+                    .desc{
+                        font-size: 12px !important;
+                    }
+                    .tip{
+                        font-size: 16px !important;
+                    }
+                    .link{
+                        font-size: 16px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .subPage4{
+        .header{
+
+        }
+        .desc{
+            padding: 64px 0 0 0 !important;
+            transform: scale(0.8);
+        }
+        .contact{
+            right: 20px;
+            bottom: 8px;
+            transform: scale(0.8);
+        }
+    }
+        
+} 
+        
+@media (min-width: 1680px) {
+        
+} 
+@media (min-width: 1920px) {
+    
+}
+
+@media screen and (min-width: 1921px) {
+    
+}
+  

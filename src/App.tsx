@@ -49,12 +49,29 @@ function App() {
   const [connectLoading, setConnectLoading] = useState(false);
   const [cardRoll, setCardRoll] = useState(false);
 
-  // mouseOverContainer.onmousemove = function(e) {
-  //   let box = element.getBoundingClientRect();
-  //   let calcY = e.clientX - box.x - (box.width / 2);
+  const innerHeight = window.innerHeight;
 
-  //   element.style.transform  = "rotateY(" + calcY + "deg) ";
-  // }
+  function setCalc() {
+    // 当前页面宽度相对于 1920宽的缩放比例，可根据自己需要修改。
+    const scaleX = document.documentElement.clientWidth / 1920
+    const scaleY = document.documentElement.clientHeight / 918
+    console.log(document.documentElement.clientWidth, document.documentElement.clientHeight);
+
+    const root: any = document.getElementById('root')
+    // 需要取缩放倍数较小的，因为需要宽高都兼容
+    if (scaleX > 1 && scaleY > 1) {
+      if (scaleX > scaleY) {
+        root.style.transform = `scale(${scaleY})`
+      } else {
+        root.style.transform = `scale(${scaleX})`
+      }
+    }
+
+  }
+  // 改变窗口大小时重新设置 rem
+  window.onresize = function () {
+    setCalc()
+  }
 
   const connection = new Connection(clusterApiUrl('devnet'));
   const HandleNavMenuClick = (item: any) => {
@@ -81,21 +98,21 @@ function App() {
       return;
     }
 
-    if (sessionStorage.getItem('canTry') === 'true') {
-      switch (type) {
-        case 1: window.open('http://47.245.31.170:7860/', '_blank'); return;
-        case 2: window.open('http://47.245.31.170:7861/', '_blank'); return;
-      }
+    // if (sessionStorage.getItem('canTry') === 'true') {
+    //   switch (type) {
+    //     case 1: window.open('http://47.245.31.170:7860/', '_blank'); return;
+    //     case 2: window.open('https://huggingface.co/spaces/zama-fhe/encrypted_sentiment_analysis', '_blank'); return;
+    //   }
 
-      return;
-    }
+    //   return;
+    // }
 
     await signAndSendTransaction('4bQCcC7znUnifK47ctZpdRZXvPgMbDh2tEvUmF46kNcU').then(async () => {
       await getBalance();
       sessionStorage.setItem('canTry', 'true')
       switch (type) {
         case 1: window.open('http://47.245.31.170:7860/', '_blank'); return;
-        case 2: window.open('http://47.245.31.170:7861/', '_blank'); return;
+        case 2: window.open('https://huggingface.co/spaces/zama-fhe/encrypted_sentiment_analysis', '_blank'); return;
       }
     });
 
@@ -208,7 +225,7 @@ function App() {
   };
 
   const handleScroll = (i: number) => {
-    scrollTo({ top: i * 1000 });
+    scrollTo({ top: i * innerHeight, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -221,6 +238,10 @@ function App() {
       });
     }
   }, [currentPubkey]);
+
+  useEffect(() => {
+    setCalc();
+  }, [])
 
   return (
     <Layout className="layout">
@@ -274,7 +295,7 @@ function App() {
                   <animated.ul className="info__item" style={{ ...ShuttleAnimation('x', -index * 500 - 1920, 0, (index + 1) * 400) }} key={index}>
                     <p style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</p>
                     {item.message.map((desc, subIndex) => {
-                      return <li style={{ lineHeight: '16px', margin: '8px 0 8px 16px' }} key={subIndex}>{desc}</li>
+                      return <li className="desc" key={subIndex}>{desc}</li>
                     })}
                   </animated.ul>
                 )
@@ -298,8 +319,11 @@ function App() {
                   <div className="inf">
                     <p className="head">Encryptede photo filtering</p>
                     <p className="desc">Image Filtering On Encrypted Data Using Fully Homomorphic Encryption</p>
-                    <p className="tip">Price: $1 ≈ 0.005 Sol</p>
-                    <a className="link" onClick={debounce(() => handleTryItClick(1), 500)}>{'Try it ⮕'}</a>
+                    <div className="bottom">
+                      <p className="tip">Price: $1 ≈ 0.005 Sol</p>
+                      <a className="link" onClick={debounce(() => handleTryItClick(1), 500)}>{'Try it ⮕'}</a>
+                    </div>
+
                   </div>
                 </animated.div>
                 <animated.div className="card" style={{ ...RotateAnimation(cardRoll) }}>
@@ -307,8 +331,10 @@ function App() {
                   <div className="inf">
                     <p className="head">Encryptede sentiment Analysis</p>
                     <p className="desc">Sentiment Analysis On Encrypted Data Using Homomorphic Encryption</p>
-                    <p className="tip">Price: $1 ≈ 0.005 Sol</p>
-                    <a className="link" onClick={debounce(() => handleTryItClick(2), 500)}>{'Try it ⮕'}</a>
+                    <div className="bottom">
+                      <p className="tip">Price: $1 ≈ 0.005 Sol</p>
+                      <a className="link" onClick={debounce(() => handleTryItClick(2), 500)}>{'Try it ⮕'}</a>
+                    </div>
                   </div>
                 </animated.div>
               </div>
