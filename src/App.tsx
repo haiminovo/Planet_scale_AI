@@ -73,6 +73,13 @@ function App() {
     setCalc()
   }
 
+  const intersectionObserver = new IntersectionObserver((entries) => {
+    // 如果 intersectionRatio 为 0，则目标在视野外，
+    // 我们不需要做任何事情。
+    if (entries[0].intersectionRatio <= 0) return;
+    setCardRoll(true);
+  });
+
   const connection = new Connection(clusterApiUrl('devnet'));
   const HandleNavMenuClick = (item: any) => {
     console.log(item);
@@ -241,6 +248,10 @@ function App() {
 
   useEffect(() => {
     setCalc();
+    const cardBox:Element|null=document.querySelector("#cardBox");
+    if(cardBox!==null){
+      intersectionObserver.observe(cardBox);
+    }
   }, [])
 
   return (
@@ -310,10 +321,10 @@ function App() {
             </div>
           </div>
           <div className="main" style={{ backgroundImage: `url(${backgroundImageBase})`, backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
-            <div className="subPage3" onMouseOver={() => setCardRoll(true)}>
+            <div className="subPage3">
               <p className="title">Want to see FHE in action?</p>
               <p className="desc">Check out Zama's real demo using FHE.</p>
-              <div className="cardBox">
+              <div className="cardBox"  id={"cardBox"}>
                 <animated.div className="card" style={{ ...RotateAnimation(cardRoll) }}>
                   <img className="img" src={demo} alt="demo" />
                   <div className="inf">
@@ -352,7 +363,7 @@ function App() {
                 </p>
               </div>
               <div className="contact">
-                <div className="top">
+                <div className="top" onClick={()=>window.open('https://twitter.com/atlantis_ai','_blank')}>
                   <p className="cu">Follow Us</p>
                   <img src={xIcon} className="xIcon" alt="x" />
                 </div>
