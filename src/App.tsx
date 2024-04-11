@@ -363,7 +363,7 @@ function App() {
                 </p>
               </div>
               <div className="contact">
-                <div className="top" onClick={()=>window.open('https://twitter.com/atlantis_ai','_blank')}>
+                <div className="top" onClick={()=>window.open('https://twitter.com/0x_atlantis','_blank')}>
                   <p className="cu">Follow Us</p>
                   <img src={xIcon} className="xIcon" alt="x" />
                 </div>
